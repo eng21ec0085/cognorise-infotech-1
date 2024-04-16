@@ -1,29 +1,60 @@
-const display = document.querySelector(".display");
-const buttons = document.querySelectorAll("button");
-const specialChars = ["%", "*", "/", "-", "+", "="];
-let output = "";
 
-//Define function to calculate based on button clicked.
-const calculate = (btnValue) => {
-  display.focus();
-  if (btnValue === "=" && output !== "") {
-    //If output has '%', replace with '/100' before evaluating.
-    output = eval(output.replace("%", "/100"));
-  } else if (btnValue === "AC") {
-    output = "";
-  } else if (btnValue === "DEL") {
-    //If DEL button is clicked, remove the last character from the output.
-    output = output.toString().slice(0, -1);
-  } else {
-    //If output is empty and button is specialChars then return
-    if (output === "" && specialChars.includes(btnValue)) return;
-    output += btnValue;
+  
+  function calculateBMI() {
+    var heightInput = document.getElementById("height");
+    var weightInput = document.getElementById("weight");
+    var resultDiv = document.getElementById("result");
+  
+    var height = parseFloat(heightInput.value);
+    var weight = parseFloat(weightInput.value);
+  
+    if (isNaN(height) || isNaN(weight)) {
+      resultDiv.innerHTML = "Please enter valid height and weight.";
+      return;
+    }
+  
+    var bmi = weight / ((height / 100) ** 2);
+    var category = "";
+  
+    if (bmi < 18.5) {
+      category = "Underweight";
+    } else if (bmi < 25) {
+      category = "Normal weight";
+    } else if (bmi < 30) {
+      category = "Overweight";
+    } else {
+      category = "Obese";
+    }
+  
+    resultDiv.innerHTML = "Your BMI is " + bmi.toFixed(2) + " (" + category + ")";
   }
-  display.value = output;
-};
-
-//Add event listener to buttons, call calculate() on click.
-buttons.forEach((button) => {
-  //Button click listener calls calculate() with dataset value as argument.
-  button.addEventListener("click", (e) => calculate(e.target.dataset.value));
-});
+  //@codewithcurious.com
+  
+  function calculateBMI() {
+    var heightInput = document.getElementById("height");
+    var weightInput = document.getElementById("weight");
+    var resultDiv = document.getElementById("result");
+  
+    var height = parseFloat(heightInput.value);
+    var weight = parseFloat(weightInput.value);
+  
+    if (isNaN(height) || isNaN(weight)) {
+      resultDiv.innerHTML = "Please enter valid height and weight.";
+      return;
+    }
+  
+    var bmi = weight / ((height / 100) ** 2);
+    var category = "";
+  
+    if (bmi < 18.5) {
+      category = "Underweight";
+    } else if (bmi < 25) {
+      category = "Normal weight";
+    } else if (bmi < 30) {
+      category = "Overweight";
+    } else {
+      category = "Obese";
+    }
+  
+    resultDiv.innerHTML = "Your BMI is " + bmi.toFixed(2) + " (" + category + ")";
+  }
